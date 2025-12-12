@@ -1,7 +1,42 @@
 #include <iostream>
-
+#include <cmath> 
 using namespace std;
 
+const double PI = M_PI;
+
+double deg2rad(double degree) {
+    return degree * (PI / 180.0);
+}
+
+double rad2deg(double radian) {
+    return radian * (180.0 / PI);
+}
+
+double findXComponent(double l1, double l2, double a1_rad, double a2_rad) {
+    double x1 = l1 * cos(a1_rad);
+    double x2 = l2 * cos(a2_rad);
+    return x1 + x2;
+}
+
+double findYComponent(double l1, double l2, double a1_rad, double a2_rad) {
+    double y1 = l1 * sin(a1_rad);
+    double y2 = l2 * sin(a2_rad);
+    return y1 + y2;
+}
+
+double pythagoras(double x_component, double y_component) {
+    return sqrt(pow(x_component, 2) + pow(y_component, 2));
+}
+void showResult(double length, double direction_deg) {
+    cout.precision(6);
+    cout << fixed;
+
+    cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << endl;
+    cout << "Length of the resultant vector = " << length << endl;
+    cout << "Direction of the resultant vector (deg) = " << direction_deg << endl;
+    cout << "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%" << endl;
+}
+//ห้ามแก้ไข
 int main(){
     double l1,l2,a1,a2,xcomp,ycomp,result_vec_length,result_vec_direction;
     cout << "Enter length of the first vector: ";
@@ -18,7 +53,8 @@ int main(){
     xcomp = findXComponent(l1,l2,a1,a2);
     ycomp = findYComponent(l1,l2,a1,a2);
     result_vec_length = pythagoras(xcomp,ycomp);
-    result_vec_direction = rad2deg(atan2(ycomp,xcomp)); 
-
+    result_vec_direction = rad2deg(atan2(ycomp,xcomp));
     showResult(result_vec_length,result_vec_direction);
+    
+    return 0;
 }
